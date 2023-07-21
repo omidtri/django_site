@@ -1,0 +1,63 @@
+{% extends 'shared/_layout.html' %}
+{% load render_partial %}
+
+
+{% block title %} گارانتی {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                {% render_partial 'user_panel_module.views.user_panel_menu_partial' %}
+            </div>
+            <div class="col-md-8">
+                <h3 class="text text-info text-center">کد تخفیف</h3>
+                <form enctype="multipart/form-data" action="{% url 'discount_page' %}" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <button type="submit" class="btn btn-success">ثبت</button>
+                </form>
+            </div>
+        </div>
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                <tr class="cart_menu">
+                    <td class="image">نام کـالا</td>
+                    <td class="price">کد تخفیف</td>
+                    <td class="quantity">جزئیات</td>
+                    <td class="total">تاریخ اعتبار</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for detail in warranty %}
+                    <tr>
+                        <td class="cart_product">
+                            <p>  {{ detail.product_name }}</p>
+                        </td>
+                        <td class="cart_description">
+                            <p>{{ detail.code_validity }}</p>
+                        </td>
+                        <td class="cart_price">
+                            <p>{{ detail.detail }}</p>
+                        </td>
+                        <td class="cart_quantity">
+                            <p>{{ detail.validity_date }}</p>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+{% endblock %}
+
+
+
+

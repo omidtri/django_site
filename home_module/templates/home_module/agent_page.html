@@ -1,0 +1,113 @@
+{% extends 'shared/_layout.html' %}
+{% load poll_extras %}
+
+{% block title %}نماینده ها{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+        <div class="col-md-4">
+            srlgkijwrv ewlgkwrpg w;gn2p4igfn l/wrgnile hblkwgjj4'pjgjnegr;p4wignw wigneat;kh
+        </div>
+            <div class="col-md-8">
+                <table class="table table-responsive table-hover table-striped">
+                    <h3>نمایندگان داخلی</h3>
+                    <tr>
+                        <th class="text-right">نام و نام خانوادگی</th>
+                        <th class="text-right">نام فروشگاه</th>
+                        <th class="text-right">شهر</th>
+                        <th class="text-right">آدرس و مشخصات</th>
+                    </tr>
+                    {% for agent in a_inter %}
+                        <tr>
+                            {% if agent.name %}
+                                <td class="text-right">{{ agent.name }}</td>
+                            {% else %}
+                                <td class="text-right">---</td>
+                            {% endif %}
+
+                            {% if agent.shopping_name %}
+                                <td class="text-right">
+                                    {{ agent.shopping_name }}
+                                </td>
+                            {% else %}
+                                <td class="text-right">---</td>
+                            {% endif %}
+
+                            {% if agent.city_country %}
+                                <td class="text-right">
+                                    {{ agent.city_country }}
+                                </td>
+                            {% else %}
+                                <td class="text-right">---</td>
+                            {% endif %}
+
+                            {% if agent.address %}
+                                <td class="text-right">
+                                    {{ agent.address }}
+                                </td>
+                            {% else %}
+                                <td class="text-right">---</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+            {#        ---------------------------------------------------#}
+            <div class="col-md-4">ewkgjnwelkgvnm;l</div>
+            <div class="col-md-8">
+                <table class="table table-responsive table-hover table-striped">
+                    <h3>نمایندگان خارجی</h3>
+                    <tr>
+                        <th class="text-right">نام و نام خانوادگی</th>
+                        <th class="text-right">نام فروشگاه</th>
+                        <th class="text-right">شهر</th>
+                        <th class="text-right">آدرس و مشخصات</th>
+                    </tr>
+                    {% for agent in a_national %}
+                        <tr>
+                            {% if agent.name %}
+                                <td class="text-right">{{ agent.name }}</td>
+                            {% else %}
+                                <td class="text-right">---</td>
+                            {% endif %}
+
+                            {% if agent.shopping_name %}
+                                <td class="text-right">
+                                    {{ agent.shopping_name }}
+                                </td>
+                            {% else %}
+                                <td class="text-right">---</td>
+                            {% endif %}
+
+                            {% if agent.city_country %}
+                                <td class="text-right">
+                                    {{ agent.city_country }}
+                                </td>
+                            {% else %}
+                                <td class="text-right">---</td>
+                            {% endif %}
+
+                            {% if agent.address %}
+                                <td class="text-right">
+                                    {{ agent.address }}
+                                </td>
+                            {% else %}
+                                <td class="text-right">---</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+
+
+            {#        --------------------------------------------------------#}
+
+        </div>
+    </div>
+
+
+{% endblock %}

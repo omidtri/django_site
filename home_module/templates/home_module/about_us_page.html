@@ -1,0 +1,137 @@
+{% extends 'shared/_layout.html' %}
+{% load static %}
+
+{% block title %}
+    درباره ما
+{% endblock %}
+
+
+{% block content %}
+
+    <!-- Header Start -->
+    <div class="container-fluid page-header">
+        <div class="container">
+            <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+                <h3 class="display-4 text-white text-uppercase">About</h3>
+                <div class="d-inline-flex text-white">
+                    <p class="m-0 text-uppercase"><a class="text-white" href="{% url 'agent_page' %}">نمایندگان ما</a>
+                    </p>
+                    <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                    <p class="m-0 text-uppercase">About</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5">
+            <div class="row">
+                <div class="col-lg-6" style="min-height: 500px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute w-100 h-100" src="{{ img.image_category.url }}"
+                             style="object-fit: cover;" alt="درباره ما">
+                    </div>
+                </div>
+                <div class="col-lg-6 pt-5 pb-lg-5">
+                    <div class="about-text bg-white p-4 p-lg-5 my-lg-5">
+                        <h6 class="text-primary text-uppercase">درباره ما</h6>
+                        <h1 class="mb-3">فورنیکو</h1>
+                        <p>{{ site_setting.about_us_text }}</p>
+                        <a href="{% url 'product_list_page' %}" class="btn btn-primary mt-1">فروشگاه</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+
+
+    <!-- Feature Start -->
+    <div class="container-fluid pb-5">
+        <div class="container pb-5">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="d-flex mb-4 mb-lg-0">
+                        <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-primary mr-3"
+                             style="height: 100px; width: 100px;">
+                            <i class="fa fa-2x fa-money-check-alt text-white"></i>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <h5 class="">استاندارد ها</h5>
+                            <p class="m-0">شرکت فورنیکو با داشتن استاندارد و گواهی های معتبر جهانی به یکی از برترین
+                                تولید کنندگان در این صنعت تبدیل شده است</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-flex mb-4 mb-lg-0">
+                        <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-primary mr-3"
+                             style="height: 100px; width: 100px;">
+                            <i class="fa fa-2x fa-award text-white"></i>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <h5 class="">سابقه کار</h5>
+                            <p class="m-0">این مجموعه با داشتن سابقه بیش از 20 سال در این صنعت و با داشتن مهندسان مجرب
+                                به یک برند قابل اعتماد را ایجاد کرده است</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-flex mb-4 mb-lg-0">
+                        <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-primary mr-3"
+                             style="height: 100px; width: 100px;">
+                            <i class="fa fa-2x fa-globe text-white"></i>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <h5 class="">کارخانه</h5>
+                            <p class="m-0">کیلومتر 75 جاده تهران ساوه، شهرک صنعتی زاویه خیابان اقاقیا304</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Feature End -->
+
+    <div class="col-md-12">
+
+        <p class="text-body text text-center border center-block">
+            {{ aboutus.body_text }}
+        </p>
+
+    </div>
+
+    <!-- Team Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <div class="text-center mb-3 pb-3">
+                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">کارکنان</h6>
+                <h1>همکاران ما</h1>
+            </div>
+            <div class="row">
+                {% for user in admin_user %}
+                    <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                        <div class="team-item bg-white mb-4">
+                            <div class="team-img position-relative overflow-hidden">
+                                {% if user.avatar %}
+                                    <img class="img-fluid w-100" src="{{ user.avatar.url }}" alt="">
+                                {% else %}
+                                    <img class="img-fluid w-100" src="/static/img/about-1.jpg" alt="">
+                                {% endif %}
+                            </div>
+                            <div class="text-center py-4">
+                                <h5 class="text-truncate">{{ user.first_name }}
+                                    {{ user.last_name }}</h5>
+                                <p class="m-0">{{ user.about_user }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Team End -->
+{% endblock %}

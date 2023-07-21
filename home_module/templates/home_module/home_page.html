@@ -1,0 +1,334 @@
+{% extends 'shared/_layout.html' %}
+{% load poll_extras %}
+
+{% block content %}
+    <!-- Carousel Start -->
+
+    <div class="container-fluid p-0">
+        <div id="header-carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                {% for slider in sliders %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img id="slider" class="w-100" src="{{ slider.image.url }}" alt="Image">
+                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                            <div class="p-3" style="max-width: 900px;">
+                                <h4 class="text-white text-uppercase mb-md-3">فورنیکو</h4>
+                                <h1 class="display-3 text-white mb-md-4">تولیدکننده سینک و روشویی های کورینی و
+                                    گرانیتی </h1>
+                                <a href="{% url 'product_list_page' %}" class="btn btn-primary py-md-3 px-md-5 mt-2">فروشگاه</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+            <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+                <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                    <span class="carousel-control-prev-icon mb-n2"></span>
+                </div>
+            </a>
+            <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+                <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                    <span class="carousel-control-next-icon mb-n2"></span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!-- Carousel End -->
+
+
+    <!-- Booking Start -->
+    <div class="container-fluid position-relative nav-bar p-0">
+        <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9;">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-3 py-lg-0 pl-3 pl-lg-5">
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+
+                        <a href="#service" class="nav-item nav-link">سرویس و خدمات</a>
+                        <a href="#new_blog" class="nav-item nav-link">جدید ترین مقالات</a>
+                        <a href="#like_product" class="nav-item nav-link">پر بازدید ترین محصولات</a>
+                        <a href="#standards" class="nav-item nav-link">استاندارد ها</a>
+                        <a href="#new_product" class="nav-item nav-link">جدید ترین محصولات</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Booking End -->
+
+
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5">
+            <div class="row">
+                <div class="col-lg-6" style="min-height: 500px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute w-100 h-100" src="{{ img_category.image_category.url }}"
+                             style="object-fit: cover;" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 pt-5 pb-lg-5">
+                    <div class="about-text bg-white p-4 p-lg-5 my-lg-5">
+                        <h6 class="text-primary text-uppercase">درباره ما</h6>
+                        <h1 class="mb-3">FORNICO</h1>
+                        <p>{{ about_us.about_us_text }}</p>
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <img class="img-fluid" src="/static/img/about-1.jpg" alt="">
+                            </div>
+                            <div class="col-6">
+                                <img class="img-fluid" src="/static/img/about-2.jpg" alt="">
+                            </div>
+                        </div>
+                        <a href="{% url 'about_us_page' %}" class="btn btn-primary mt-1">درباره ما</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+
+    <!-- Feature Start -->
+    <div class="container-fluid pb-5">
+        <div class="container pb-5">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="d-flex mb-4 mb-lg-0">
+                        <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-primary mr-3"
+                             style="height: 100px; width: 100px;">
+                            <i class="fa fa-2x fa-money-check-alt text-white"></i>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <h5 class="">استاندارد ها</h5>
+                            <p class="m-0">شرکت فورنیکو با داشتن استاندارد و گواهی های معتبر جهانی به یکی از برترین
+                                تولید کنندگان در این صنعت تبدیل شده است</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-flex mb-4 mb-lg-0">
+                        <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-primary mr-3"
+                             style="height: 100px; width: 100px;">
+                            <i class="fa fa-2x fa-award text-white"></i>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <h5 class="">سابقه کار</h5>
+                            <p class="m-0">این مجموعه با داشتن سابقه بیش از 20 سال در این صنعت و با داشتن مهندسان مجرب
+                                به یک برند قابل اعتماد را ایجاد کرده است</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-flex mb-4 mb-lg-0">
+                        <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-primary mr-3"
+                             style="height: 100px; width: 100px;">
+                            <i class="fa fa-2x fa-globe text-white"></i>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <h5 class="">کارخانه</h5>
+                            <p class="m-0">کیلومتر 75 جاده تهران ساوه، شهرک صنعتی زاویه خیابان اقاقیا304</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Feature End -->
+
+
+    <!-- Destination Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <div class="text-center mb-3 pb-3">
+                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">مقالات</h6>
+                <h1 id="new_blog">جدید ترین مقالات</h1>
+            </div>
+            <div class="row">
+                {% for article in articles %}
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="destination-item position-relative overflow-hidden mb-2">
+                            <img class="img-fluid" src={{ article.image.url }} alt={{ article.title }}">
+                            <a class="destination-overlay text-white text-decoration-none"
+                               href="{% url 'articles_detail' pk=article.id %}">
+                                <h5 class="text-white">{{ article.title }}</h5>
+                                <span>{{ article.author }}</span>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Destination Start -->
+
+
+    <!-- Service Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <div class="text-center mb-3 pb-3">
+                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">خدمات</h6>
+                <h1 id="service">سرویس و خدمات</h1>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="service-item bg-white text-center mb-2 py-5 px-4">
+                        <i class="fa fa-2x fa-route mx-auto mb-4"></i>
+                        <h5 class="mb-2">ارسال درب منزل</h5>
+                        <p class="m-0">ارسال به دست مشتری 3 تا 7 روز کاری </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="service-item bg-white text-center mb-2 py-5 px-4">
+                        <i class="fa fa-2x fa-ticket-alt mx-auto mb-4"></i>
+                        <h5 class="mb-2">گارنتی</h5>
+                        <p class="m-0">تمامی محصولات این مجموعه دارای گارانتی اصالت کالا میباشد کع در صورت هرگونه خرابی
+                            در محصول به صورت رایگان تعویض میگردد</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="service-item bg-white text-center mb-2 py-5 px-4">
+                        <i class="fa fa-2x fa-hotel mx-auto mb-4"></i>
+                        <h5 class="mb-2">نصب</h5>
+                        <p class="m-0">نصب توسط کادر مجرب و آزموده</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Service End -->
+
+
+    <!-- Packages Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <div class="text-center mb-3 pb-3">
+                <h6 class="text-primary text-uppercase">محصولات</h6>
+                <h1 id="like_product">پر بازدید ترین محصولات</h1>
+            </div>
+            <div class="row">
+                {% for product in most_visit %}
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="package-item bg-white mb-2">
+                            {% if product.image %}
+                                <img class="img-fluid" src="{{ product.image.url }}" alt="">
+                            {% else %}
+                                <img class="img-fluid" src="/static/img/about-1.jpg" alt="">
+                            {% endif %}
+                            <div class="p-4">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <small class="m-0"><i
+                                            class="fa fa-map-marker-alt text-primary mr-2"></i>{{ product.brand }}
+                                    </small>
+                                </div>
+                                <a class="h5 text-decoration-none"
+                                   href="{{ product.get_absolut_url }}">{{ product.title }}</a>
+                                <div class="border-top mt-4 pt-4">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="m-0">{{ product.price|three_digits_currency }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Packages End -->
+
+
+    <!-- Registration Start -->
+    <div class="container-fluid bg-registration py-5" style="margin: 90px 0;">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-7 mb-5 mb-lg-0">
+                    <div class="mb-4">
+                        <h6 class="text-primary text-uppercase">زیبا و مدرن</h6>
+                        <h1 class="text-white"><span class="text-primary">سینک و</span> روشویی های کورینی و گرانیتی
+                        </h1>
+                    </div>
+                    <p class="text-white">با ورود سینک های کورینی به بازار به دلیل تنوع رنگی که این سینک ها داشت و البته
+                        قابلیت آندرمانت یکپارچه شدن با صفحات کورین داشت، توانست جذابیت خوبی برای
+                        خود ایجاد کند.</p>
+                    <ul class="list-inline text-white m-0">
+                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>زیبا مدرن
+                        </li>
+                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>دارای تنوع رنگی بالا</li>
+                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>مقاومت بالا
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-5">
+                    <div class="card border-0">
+                        <div class="card-header text-center p-4">
+                            <h6 class="text-white m-0"><a href="{% url 'register_page' %}">ثبت نام</a></h6>
+                        </div>
+                        <div class="card-header text-center p-4">
+                            <h6 class="text-white m-0"><a href="{% url 'login_page' %}">لاگین</a></h6>
+                        </div>
+                        <div class="card-header  text-center p-4">
+                            <h6 class="text-white m-0"><a href="{% url 'about_us_page' %}">درباره ما</a></h6>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Registration End -->
+
+
+    <!-- Team Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <div class="text-center mb-3 pb-3">
+                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">گواهی</h6>
+                <h1 id="standards">استاندارد ها</h1>
+            </div>
+            <div class="row">
+                {% for standard in standards %}
+                    <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
+                        <div class="team-item bg-white mb-4">
+                            <div class="team-img position-relative overflow-hidden">
+                                <img class="img-fluid w-100" src="{{ standard.image.url }}" alt="">
+                            </div>
+                            <div class="text-center py-4">
+                                <h5 class="text-truncate">{{ standard.title }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Team End -->
+
+    <!-- Testimonial Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="text-center mb-3 pb-3">
+                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">محصولات</h6>
+                <h1 id="new_product">جدید ترین محصولات</h1>
+            </div>
+            <div class="owl-carousel testimonial-carousel">
+                {% for product in last_product %}
+                    <div class="text-center">
+                        <img class="img-fluid mx-auto" src="{{ product.image.url }}"
+                             style="width: 200px; height: 200px;">
+                        <div class="testimonial-text bg-white p-4 mt-n5">
+                            <p class="mt-5">{{ product.price|three_digits_currency }}
+                            </p>
+                            <h5 class="text-truncate">{{ product.title }}</h5>
+                            <span>{{ product.brand }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial End -->
+
+
+
+{% endblock %}

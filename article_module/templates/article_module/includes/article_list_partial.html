@@ -1,0 +1,28 @@
+{% load poll_extras %}
+{% load thumbnail %}
+
+
+<div class="col-lg-4 col-md-6 mb-4">
+    <div class="package-item bg-white mb-2">
+        {% if article.image %}
+            {% thumbnail article.image "350x250" quality=90 crop='center' as im %}
+                <img class="img-fluid" alt="" src="{{ im.url }}">
+            {% endthumbnail %}
+        {% else %}
+            <img src="/static/img/package-1.jpg" alt="">
+        {% endif %}
+        <div class="p-4">
+            <div class="d-flex justify-content-between mb-3">
+                <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>{{ article.short_description }}</small>
+            </div>
+            <a class="h5 text-decoration-none" href="{% url 'articles_detail' article.id %}">{{ article.title }}</a>
+            <div class="border-top mt-4 pt-4">
+                <div class="d-flex justify-content-between">
+
+                    <h5 class="m-0">{{ article.create_date|show_jalali_date }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

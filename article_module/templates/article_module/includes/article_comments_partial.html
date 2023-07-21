@@ -1,0 +1,38 @@
+{% load poll_extras %}
+
+<h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">{{ comments_count }}</h4>
+{% for comment in comments %}
+    <div class="media">
+
+        <img src="{{ comment.user.avatar.url }}" alt="Image" class="img-fluid mr-3 mt-1"
+             style="width: 45px;">
+        <div class="media-body">
+            <h6><a href="">{{ comment.user }}</a>
+                <small><i>{{ comment.create_date | time }}---</i></small><small><i>{{ comment.create_date|show_jalali_date }}</i></small>
+            </h6>
+            <p>  {{ comment.text }}</p>
+            <button class="btn btn-sm btn-outline-primary"
+                    onclick="fillParentId({{ comment.id }})">
+                پاسخ
+            </button>
+            {#                                    ----------------------------------- 2div#}
+
+        </div>
+    </div>
+
+    {% for sub_comment in comment.articlecomment_set.all %}
+        <div class="media mt-4" style="color: #5bc0de">
+            <img src="{{ sub_comment.user.avatar.url }}" alt="Image"
+                 class="img-fluid mr-3 mt-1"
+                 style="width: 45px;">
+            <div class="media-body">
+                <h6><a href="">{{ sub_comment.user }}</a>
+                    <small><i>{{ sub_comment.create_date | time }}</i></small><small><i>{{ sub_comment.create_date|show_jalali_date }}</i></small>
+                </h6>
+                <p style="color: #5bc0de"> {{ sub_comment.text }}</p>
+                <button class="btn btn-sm btn-outline-primary">پاسخ</button>
+            </div>
+        </div>
+    {% endfor %}
+{% endfor %}
+<!-- Comment List End -->

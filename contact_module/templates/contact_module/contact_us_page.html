@@ -1,0 +1,81 @@
+{% extends 'shared/_layout.html' %}
+
+{% block title %}
+    تماس با ما
+{% endblock %}
+
+{% block content %}
+    <!-- Contact Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="col-md-12">
+                <div class="contact-info">
+                    <h2 class="title text-center">اطلاعات تماس</h2>
+                    <address>
+                        <div class="col-sm-6">
+                            <p>{{ site_setting.site_name }}</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p> آدرس: {{ site_setting.address }}</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p>تلفن تماس : {{ site_setting.phone }}</p>
+                        </div>
+                        <div class="col-sm-6">
+                            {% if site_setting.fax %}
+                                <p>فکس : {{ site_setting.fax }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="col-sm-6">
+                            {% if site_setting.email %}
+                                <p style="font-family: tahoma;">ایمیـل : {{ site_setting.email }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="btn btn-success"><a href="#">تماس مستقیم واتساپ</a></div>
+                    </address>
+                </div>
+            </div>
+            <div class="text-center mb-3 pb-3">
+                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Contact</h6>
+                <h1>Contact For Any Query</h1>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-white" style="padding: 30px;">
+                        <div id="success"></div>
+                        <form id="main-contact-form" class="contact-form row" action="{% url 'contact_us_page' %}"
+                              method="post">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="control-group col-sm-6">
+                                    {{ form.email.label_tag }}
+                                    {{ form.email }}
+                                    {{ form.email.errors }}
+                                </div>
+                                <div class="control-group col-sm-6">
+                                    {{ form.full_name.label_tag }}
+                                    {{ form.full_name }}
+                                    {{ form.full_name.errors }}
+                                </div>
+                            </div>
+                            <div class="control-group col-md-12">
+                                {{ form.title.label_tag }}
+                                {{ form.title }}
+                                {{ form.title.errors }}
+                            </div>
+                            <div class="control-group col-sm-12">
+                                {{ form.message.label_tag }}
+                                {{ form.message }}
+                                {{ form.message.errors }}
+                            </div>
+                            <div class="text-center col-sm-12">
+                                <button type="submit" class="btn btn-primary pull-right">           ارسال           </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+{% endblock %}

@@ -1,0 +1,29 @@
+{% load poll_extras %}
+{% load thumbnail %}
+
+
+<div class="col-lg-4 col-md-6 mb-4">
+    <div class="package-item bg-white mb-2">
+        {% if product.image %}
+            {% thumbnail product.image "350x250" quality=90 crop='center' as im %}
+                <img class="img-fluid" alt="" src="{{ im.url }}">
+            {% endthumbnail %}
+        {% else %}
+            <img src="/static/img/package-1.jpg" alt="">
+        {% endif %}
+        {#        <img class="img-fluid" src="{{ product.image.url }}" alt="">#}
+        <div class="p-4">
+            <div class="d-flex justify-content-between mb-3">
+                <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>{{ product.brand }}</small>
+            </div>
+            <a class="h5 text-decoration-none" href="{{ product.get_absolut_url }}">{{ product.title }}</a>
+            <div class="border-top mt-4 pt-4">
+                <div class="d-flex justify-content-between">
+
+                    <h5 class="m-0">{{ product.price|three_digits_currency }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

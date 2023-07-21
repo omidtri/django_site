@@ -1,0 +1,5 @@
+{% for brand in brands %}
+    <option value="1">{{ brand.title }} <a
+            href="{% url 'product-categories-list' cat=brand.url_title %}"></a>
+    </option>
+{% endfor %}

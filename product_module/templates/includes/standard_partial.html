@@ -1,0 +1,18 @@
+{% load poll_extras %}
+{% load thumbnail %}
+
+<div class="col-sm-{{ col_size }}" id="standard">
+    <div class="product-image-wrapper">
+        <div class="single-products">
+            <div class="productinfo text-center">
+                {% if product.image %}
+                    {% thumbnail product.image "320x400" quality=90 crop='center' as im %}
+                        <img  src="{{ im.url }}" alt={{ im.title }}>
+                    {% endthumbnail %}
+                {% else %}
+                    <img src="/static/images/shop/product.jpg" alt="image for site">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

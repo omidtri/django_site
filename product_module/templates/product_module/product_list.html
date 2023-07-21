@@ -1,0 +1,95 @@
+{% extends 'shared/_layout.html' %}
+{% load thumbnail %}
+{% load render_partial %}
+
+{% block title %}لیست محصولات{% endblock %}
+
+{% block content %}
+    <!-- Header Start -->
+    <div class="container-fluid page-header">
+        <div class="container">
+            <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+                <h3 class="display-4 text-white text-uppercase">Packages</h3>
+                <div class="d-inline-flex text-white">
+                    <p class="m-0 text-uppercase"><a class="text-white" href="">Home</a></p>
+                    <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                    <p class="m-0 text-uppercase">Packages</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Booking Start -->
+    <div class="container-fluid booking mt-5 pb-5">
+        <div class="container pb-5">
+            <div class="bg-light shadow" style="padding: 30px;">
+                <div class="row align-items-center" style="min-height: 60px;">
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3 mb-md-0">
+                                    <div><!--price-range-->
+                                        <p>فیلتر قیمت</p>
+                                        <div class="range-slider">
+                                            <span class="rangeValues"></span>
+                                            <input value="1000" min="1000" max="50000" step="500" type="range">
+                                            <input value="50000" min="1000" max="50000" step="500" type="range">
+                                        </div>
+
+                                    </div><!--/price-range-->
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3 mb-md-0">
+                                    <select class="custom-select px-4" style="height: 47px;">
+                                        <option selected>دسته بندی</option>
+                                        {% render_partial 'product_module.views.product_categories_partial' %}
+                                        {% for category in categories %}
+                                            <option value="1">{{ category.title }} <a
+                                                    href="{% url 'product-categories-list' cat=category.url_title %}"></a>
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="mb-3 mb-md-0">
+                                    <select class="custom-select px-4" style="height: 47px;">
+                                        <option selected>برند ها</option>
+                                        {% render_partial 'product_module.views.product_brands_partial' %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-primary btn-block" type="submit" style="height: 47px; margin-top: -2px;">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Booking End -->
+
+    <!-- Packages Start -->
+    <div class="col-md-12">
+        <div class="container-fluid py-5">
+            <div class="container pt-5 pb-3">
+                <div class="text-center mb-3 pb-3">
+                    <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Packages</h6>
+                    <h1>Pefect Tour Packages</h1>
+                </div>
+                <div class="row">
+                    {% for product in products %}
+                        {% include 'includes/product_item_partial.html' with product=product col_size=4 %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Packages End -->
+{% endblock %}

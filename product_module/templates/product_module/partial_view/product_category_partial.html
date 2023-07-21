@@ -1,0 +1,7 @@
+{% for category in categories %}
+    <a class="d-flex align-items-center text-decoration-none bg-white mb-3" href="{% url 'product-categories-list' cat=category.url_title %}">
+        <div class="pl-3">
+            <h6 class="m-1">{{ category.title }}</h6>
+        </div>
+    </a>
+{% endfor %}

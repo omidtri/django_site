@@ -1,0 +1,200 @@
+{% extends 'shared/_layout.html' %}
+{% load poll_extras %}
+{% load render_partial %}
+
+
+{% block title %} {{ product.title }} {% endblock %}
+{% block dis %}{{ product.short_description }}{% endblock %}
+
+{% block content %}
+    <!-- Blog Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Blog Detail Start -->
+                    <div class="pb-3">
+                        <div class="blog-item">
+                            <div class="position-relative">
+                                <img id="main_image" class="img-fluid w-100" src="{{ product.image.url }}"
+                                     alt="{{ product.keyword }}">
+                                {% if product.is_discount %}
+                                    <div class="blog-date">
+
+                                        <h6 class="font-weight-bold mb-n1">حراج</h6>
+                                        <small class="text-white text-uppercase">{{ product.discount_price }}</small>
+
+                                    </div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                        <div class="bg-white mb-3" style="padding: 30px;">
+                            <div class="d-flex mb-3">
+                            </div>
+                            <h2 class="mb-3">{{ product.keyword }}</h2>
+                            {{ product.description|safe }}
+                        </div>
+                    </div>
+                    <!-- Blog Detail End -->
+
+                    <!-- Comment List Start -->
+                    <div class="bg-white" style="padding: 30px; margin-bottom: 30px;" id="comments_area">
+                        <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">{{ comments_count }}</h4>
+                        {% for comment in comments %}
+                            <div class="media" id="single_comment_box_{{ comment.id }}">
+
+                                <img src="{{ comment.user.avatar.url }}" alt="Image" class="img-fluid mr-3 mt-1"
+                                     style="width: 45px;">
+                                <div class="media-body">
+                                    <h6><a href="">{{ comment.user }}</a>
+                                        <small><i>{{ comment.create_date | time }}---</i></small><small><i>{{ comment.create_date|show_jalali_date }}</i></small>
+                                    </h6>
+                                    <p>  {{ comment.message }}</p>
+                                    <button class="btn btn-sm btn-outline-primary"
+                                            onclick="fillParentId({{ comment.id }})">
+                                        پاسخ
+                                    </button>
+                                    {#                                    ----------------------------------- 2div#}
+
+                                </div>
+                            </div>
+
+                            {% for sub_comment in comment.productcomment_set.all %}
+                                <div id="single_comment_box_{{ comment.id }}" class="media mt-4" style="color: #5bc0de">
+                                    <img src="{{ sub_comment.user.avatar.url }}" alt="Image"
+                                         class="img-fluid mr-3 mt-1"
+                                         style="width: 45px;">
+                                    <div class="media-body">
+                                        <h6><a href="">{{ sub_comment.user }}</a>
+                                            <small><i>{{ sub_comment.create_date | time }}</i></small><small><i>{{ sub_comment.create_date|show_jalali_date }}</i></small>
+                                        </h6>
+                                        <p style="color: #5bc0de"> {{ sub_comment.message }}</p>
+                                        <button class="btn btn-sm btn-outline-primary"
+                                                onclick="fillParentId({{ comment.id }})">پاسخ
+                                        </button>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    <!-- Comment List End -->
+
+                    <!-- Comment Form Start -->
+                    {% if request.user.is_authenticated %}
+                        <div class="bg-white mb-3" style="padding: 30px;">
+                            <h4 class="text-uppercase mb-4" style="letter-spacing: 1px;">نظر خود را ارسال کنید</h4>
+
+                            <input type="hidden" id="parent_id" value="">
+                            <div class="form-group">
+                                <label for="message">متن پیام *</label>
+                                <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+                            </div>
+
+                            <div class="form-group mb-0">
+
+                                <a class="btn btn-primary font-weight-semi-bold py-2 px-3"
+                                   onclick="sendProductComment({{ product.id }})">ارسـال
+                                    نظـر</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-warning">
+                            برای درج نظر می بایست <a href="{% url 'login_page' %}">لاگین</a> کنید
+                        </div>
+                    {% endif %}
+                    <!-- Comment Form End -->
+                </div>
+
+                <div class="col-lg-4 mt-5 mt-lg-0">
+                    <!-- Author Bio -->
+                    <div class="d-flex flex-column text-center bg-white mb-5 py-5 px-4">
+                        {% if product.is_discount %}
+                            <b><p>قیمت : {{ product.discount_price|three_digits_currency }}</p></b>
+                        {% else %}
+                            <b><p>قیمت : {{ product.price|three_digits_currency }}</p></b>
+                        {% endif %}
+                        {% if product.brand %}
+                            <b><p class="text-primary mb-3"> برند محصول :{{ product.brand }}</p></b>
+                        {% endif %}
+                        {% if product.short_description %}
+                            <p> {{ product.short_description }}</p>
+                        {% endif %}
+                        <div class="d-flex justify-content-center">
+                        </div>
+                    </div>
+
+                    <!-- Search Form -->
+                    <div class="mb-5">
+                        <div class="bg-white" style="padding: 30px;">
+                            <div class="input-group">
+                                <div class="carousel-inner">
+
+
+                                    {% for group in product_galleries_group %}
+                                        <div class="item {% if forloop.first %}active{% endif %}">
+                                            {% for gallery in group %}
+                                                <a onclick="showLargeImage('{{ gallery.image.url }}')">
+                                                    <img src="{{ gallery.image.url }}" width="60" height="60" alt="">
+                                                </a>
+                                            {% endfor %}
+
+                                        </div>
+                                    {% endfor %}
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category List -->
+                    <div class="mb-5">
+                        <h4 class="text-uppercase mb-4">افزودن به سبد خرید</h4>
+                        <div class="bg-white" style="padding: 30px;">
+                            <ul class="list-inline m-0">
+
+                                <li class="mb-3 d-flex justify-content-between align-items-center">
+                                    <div class="col-md-9">
+                                    <span>
+                                        <label class="text text-info">     :      تعداد   </label>
+										<input type="number" min="1" value="1"
+                                               class="form-control" id="product-count">
+										<button onclick="addProductToOrder({{ product.id }})"
+                                                class="btn btn-success">
+											<i class="fa fa-shopping-cart"></i>
+											افزودن به سبد خرید
+										</button>
+									</span>
+                                    </div>
+                                </li>
+                                <li class="mb-3 d-flex justify-content-between align-items-center">
+
+                                    {% if product.is_active %}
+                                        <p class="text text-success">در انبـار موجود می باشد</p>
+                                    {% else %}
+                                        <p class="text text-danger">در انبـار موجود نمی باشد</p>
+                                    {% endif %}
+
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Recent Post -->
+                    <div class="mb-5">
+                        <h4 class="text-uppercase mb-4">دسته بندی ها</h4>
+                        {% render_partial 'product_module.views.product_categories_partial' %}
+
+                    </div>
+
+                    <!-- Tag Cloud -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Blog End -->
+
+{% endblock %}

@@ -1,0 +1,11 @@
+<div class="input-group">
+    <input type="text" class="form-control border-light" id="email_news" style="padding: 25px;"
+           placeholder="Your Email">
+    <div class="input-group-append">
+        <button onclick="sendEmailNews()" class="btn btn-primary px-3">ثبت</button>
+        {% if text %}
+            <p class="text-info">{{ text }}</p>
+        {% endif %}
+    </div>
+</div>
+
